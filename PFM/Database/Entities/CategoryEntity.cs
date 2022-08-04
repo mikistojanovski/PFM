@@ -5,7 +5,7 @@ namespace PFM.Database.Entities
     public class CategoryEntity
     {
        
-       [Key]
+        [Key]
         public string code { get; set; }
         public string parentcode { get; set; }        
         public string name { get; set; }

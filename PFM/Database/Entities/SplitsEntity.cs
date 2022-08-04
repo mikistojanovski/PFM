@@ -3,9 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PFM.Database.Entities
 {
-    public class SplitsEntity{
-     [Key]
+    public class SplitsEntity
+    {
+        [Key]
         public int id { get; set; }
+
         [ForeignKey("TransactionEntity")]
         public int transactionid { get; set; }
         

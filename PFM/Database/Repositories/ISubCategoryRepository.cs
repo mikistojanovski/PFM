@@ -4,7 +4,6 @@ namespace PFM.Database.Repositories
 {
     public interface ISubCategoryRepository
     {
-        Task<List<SubCategoryEntity>> Create(List<SubCategoryEntity> Categories);
-       
+        Task<List<SubCategoryEntity>> Create(List<SubCategoryEntity> Categories);       
     }
 }

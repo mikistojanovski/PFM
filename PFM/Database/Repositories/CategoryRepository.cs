@@ -23,6 +23,7 @@ namespace PFM.Database.Repositories
            
                  var categories=new List<CreateCategoryCommand>();
                  var subcategories=new List<CreateCategoryCommand>();
+
                  foreach(var com in Categories)
                  {
                         if(com.parentcode.Length==0)
@@ -103,6 +104,7 @@ namespace PFM.Database.Repositories
                }
                if(!string.IsNullOrEmpty(catcode))
                {
+                catcode = catcode.ToUpper();
                 categories = _context.Categories.Where(x => x.code == catcode);
                }
 
@@ -130,7 +132,7 @@ namespace PFM.Database.Repositories
                  }
                }
                
-                 var analit=    new Analytics
+                 var analit = new Analytics
                      {
                           CatCode=pom.y.parentcode,
                           Amount=total,

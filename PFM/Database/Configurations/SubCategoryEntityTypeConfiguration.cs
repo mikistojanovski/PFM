@@ -9,7 +9,7 @@ namespace PFM.Database.Configurations
         {
             builder.ToTable("SubCategories");
             builder.HasKey(x => x.code);
-            builder.Property(x => x.name).IsRequired();
+            builder.Property(x => x.name);
             builder.HasOne(x => x.Category).WithMany().HasForeignKey(x => x.parentcode);
             builder.HasOne(x => x.Transaction).WithMany().HasForeignKey(x => x.TransactionId);
             

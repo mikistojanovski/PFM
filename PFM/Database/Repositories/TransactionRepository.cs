@@ -31,7 +31,7 @@ namespace PFM.Database.Repositories
 
         public async Task<TransactionEntity> Create(TransactionEntity transaction)
         {
-            _dbContext.Transactions.Add(transaction);
+            _dbContext.Transactions.AddRange(transaction);
 
             await _dbContext.SaveChangesAsync();
 
@@ -120,7 +120,7 @@ namespace PFM.Database.Repositories
                                   count_amount+=1;
                             }
                         }
-                         var toadd=    new SplitsEntity
+                         var toadd = new SplitsEntity
                      {
                           transactionid=transactionid,
                           Amount=trasaction.amount*count_amount,

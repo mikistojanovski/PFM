@@ -27,7 +27,10 @@ public class CategoriesController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateCategories(IFormFile file, [FromServices] IWebHostEnvironment hostingEnvironment)
     {
-
+        if (file == null)
+        {
+            return BadRequest("No file");
+        }
         //CSV
         string filename = $"{hostingEnvironment.WebRootPath}\\files\\{file.FileName}";
         using (FileStream fs = System.IO.File.Create(filename))

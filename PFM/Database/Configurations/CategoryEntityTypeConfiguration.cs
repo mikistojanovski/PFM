@@ -9,7 +9,7 @@ namespace PFM.Database.Configurations
         {
             builder.ToTable("Categories");
             builder.HasKey(x => x.code);
-            builder.Property(x => x.name).IsRequired();
+            builder.Property(x => x.name);
             builder.Property(x => x.parentcode);
             
         } 

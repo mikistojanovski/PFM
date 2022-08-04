@@ -6,15 +6,16 @@ namespace PFM.Database.Entities
 {
     public class SubCategoryEntity
     {
-          [Key]
+        [Key]
         public string code { get; set; }
-          public string name { get; set; }
-          
+        public string name { get; set; }
+        
         [ForeignKey("Category")]
         public string parentcode { get; set; }
         public Category Category { get; set; }
         
         public Transaction Transaction { get; set; }
+
         [ForeignKey("Transaction")]
         public int? TransactionId { get; set; }
     }

@@ -14,7 +14,7 @@ namespace PFM.Models
         public Category Category { get; set; }
 
         [ForeignKey("Transaction")]
-        public int? TransactionId { get; set; }
+        public int TransactionId { get; set; }
         public Transaction Transaction { get; set; }
 
        

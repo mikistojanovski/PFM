@@ -5,10 +5,10 @@ namespace PFM.Commands
 {
      public class CreateTransactionCommand
      {
-        [Required]
+         [Required]
          public int id {get; set;}
 
-        [Required]
+         [Required]
          public string beneficiaryname { get; set; }
          public DateTime date { get; set; }
          public string direction { get;set; }

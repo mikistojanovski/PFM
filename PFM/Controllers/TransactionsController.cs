@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using CsvHelper;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using PFM.Commands;
 using PFM.Models;
@@ -9,6 +10,7 @@ namespace PFM.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[EnableCors("_myAllowSpecificOrigins")]
 public class TransactionController : ControllerBase
 {
 
@@ -27,6 +29,10 @@ public class TransactionController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> CreateTransaction(IFormFile file, [FromServices] IWebHostEnvironment hostingEnvironment)
     {
+        if (file == null)
+        {
+            return BadRequest("No file");
+        }
 
         //CSV
         string filename = $"{hostingEnvironment.WebRootPath}\\files\\{file.FileName}";
@@ -44,7 +50,7 @@ public class TransactionController : ControllerBase
 
         if (result.Count == 0)
         {
-            return BadRequest("No transactions created");
+            return BadRequest("Can`t create");
         }
         else
         {
@@ -82,6 +88,11 @@ public class TransactionController : ControllerBase
     [HttpPost("transactionid")]
     public async Task<IActionResult> CategorizeTransaction([FromQuery] int transactionid, [FromQuery] string namecategory)
     {
+        if (transactionid == null || namecategory == null)
+        {
+            return BadRequest("Missing ID or NAME");
+        }
+
         var result = await _transactionService.CategorizeTransaction(transactionid, namecategory);
         if (result == null)
         {
@@ -95,7 +106,7 @@ public class TransactionController : ControllerBase
     public async Task<IActionResult> GetProducts([FromQuery] int? page, [FromQuery] int? pageSize, [FromQuery] string sortBy, [FromQuery] SortOrder sortOrder)
     {
         page = page ?? 1;
-        pageSize = pageSize ?? 10;
+        pageSize = pageSize ?? 5;
         _logger.LogInformation("Returning {page}. page of products", page);
         var result = await _transactionService.GetTransactions(page.Value, pageSize.Value, sortBy, sortOrder);
         return Ok(result);
